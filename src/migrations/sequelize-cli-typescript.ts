@@ -1,4 +1,3 @@
-// src/migrations/sequelize-cli-typescript.ts
 import { QueryInterface, DataTypes } from 'sequelize';
 
 module.exports = {
