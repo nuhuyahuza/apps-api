@@ -17,7 +17,7 @@ export default {
   development: {
     username: DB_USERNAME || 'root',
     password: DB_PASSWORD || '',
-    database: DB_DATABASE || 'database_development',
+    database: DB_DATABASE || 'myapp_database',
     host: DB_HOST || '127.0.0.1',
     dialect: (DB_DIALECT || 'mysql') as 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql',
     pool: {
@@ -30,7 +30,7 @@ export default {
   test: {
     username: DB_USERNAME || 'root',
     password: DB_PASSWORD || '',
-    database: DB_DATABASE || 'database_test',
+    database: DB_DATABASE || 'myapp_database',
     host: DB_HOST || '127.0.0.1',
     dialect: DB_DIALECT || 'mysql',
     pool: {
@@ -43,7 +43,7 @@ export default {
   production: {
     username: DB_USERNAME || 'root',
     password: DB_PASSWORD || '',
-    database: DB_DATABASE || 'database_production',
+    database: DB_DATABASE || 'myapp_database',
     host: DB_HOST || '127.0.0.1',
     dialect: DB_DIALECT || 'mysql',
     pool: {
