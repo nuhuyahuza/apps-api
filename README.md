@@ -18,6 +18,11 @@ The login information provided is the default login when the app is initialized
 
 ## Getting Started
 
+- yarn start
+- yarn test - ensure to update the "TOKEN" in the .env file for testing to work properly
+- yarn seed - populate database with dummy data
+- yarn migrate - migrate db changes
+
 ### Prerequisites
 
 - Node.js
