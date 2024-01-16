@@ -1,14 +1,9 @@
 module.exports = {
     "env": {
-        "browser": true,
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
         "standard-with-typescript",
-        "plugin:@typescript-eslint/recommneded",
-        "plugin:prettier/recommended",
-        "plugin:import/errors",
         "plugin:import/warnings",
         "plugin:import/typescript"
     ],
@@ -31,8 +26,15 @@ module.exports = {
     },
     "plugins":['@typescript-eslint','prettier','import'],
     "rules": {
-        "@typescript-eslint/no-unused-vars": ["error"],
-        "no-console": 'off'
+         "@typescript-eslint/no-unused-vars": ["error"],
+        "no-console": 'off',
+        "@typescript-eslint/prefer-nullish-coalescing": 'off',
+        '@typescript-eslint/strict-boolean-expressions': 'off',
+        '@typescript-eslint/consistent-type-assertions': 'off',
+        '@typescript-eslint/no-misused-promises': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off',
+        '@typescript-eslint/ban-types': 'off',
+        "@typescript-eslint/no-floating-promises": 'off'
     },
     settings: {
         'import/pasers': {

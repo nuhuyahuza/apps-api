@@ -1,11 +1,11 @@
-import { DataTypes, Model, Sequelize } from 'sequelize';
-import sequelize from '../utils/database.ts';
+import { DataTypes, Model } from 'sequelize'
+import sequelize from '../utils/database.ts'
 
 class App extends Model {
-  public id!: number;
-  public name!: string;
-  public icon!: string;
-  public url!: string;
+  public id!: number
+  public name!: string
+  public icon!: string
+  public url!: string
 }
 
 App.init(
@@ -13,25 +13,25 @@ App.init(
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     icon: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: false
     },
     url: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
   {
-    sequelize: sequelize as Sequelize, // Explicitly type sequelize instance
-    modelName: 'App',
+    sequelize, // Explicitly type sequelize instance
+    modelName: 'App'
   }
-);
+)
 
-export default App;
+export default App

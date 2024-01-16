@@ -1,4 +1,4 @@
-import { QueryInterface, DataTypes } from 'sequelize';
+import { type QueryInterface, DataTypes } from 'sequelize'
 
 module.exports = {
   up: async (queryInterface: QueryInterface) => {
@@ -7,23 +7,23 @@ module.exports = {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         allowNull: false,
-        primaryKey: true,
+        primaryKey: true
       },
       // Add your table columns here...
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: new Date(),
+        defaultValue: new Date()
       },
       updatedAt: {
         type: DataTypes.DATE,
         allowNull: false,
-        defaultValue: new Date(),
-      },
-    });
+        defaultValue: new Date()
+      }
+    })
   },
 
   down: async (queryInterface: QueryInterface) => {
-    await queryInterface.dropTable('TestTable');
-  },
-};
+    await queryInterface.dropTable('TestTable')
+  }
+}

@@ -1,7 +1,7 @@
-import { Sequelize } from 'sequelize';
-import dbConfig from '@src/config/dbConfig';
+import { Sequelize } from 'sequelize'
+import dbConfig from '@src/config/dbConfig'
 
-const { database, username, password, host, dialect, pool } = dbConfig.development;
+const { database, username, password, host, dialect, pool } = dbConfig.development
 
 const sequelize = new Sequelize(
   database,
@@ -18,7 +18,7 @@ const sequelize = new Sequelize(
         idle: pool.idle || 10000
       }
     }
-  },
-);
+  }
+)
 
-export default sequelize;
+export default sequelize

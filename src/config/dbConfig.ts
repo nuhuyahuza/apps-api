@@ -1,5 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import { config } from 'dotenv'
+config()
 
 const {
   DB_USERNAME,
@@ -11,7 +11,7 @@ const {
   DB_POOL_MIN,
   DB_POOL_ACQUIRE,
   DB_POOL_IDLE
-} = process.env;
+} = process.env
 
 export default {
   development: {
@@ -53,4 +53,4 @@ export default {
       idle: DB_POOL_IDLE || 10000
     }
   }
-};
+}
