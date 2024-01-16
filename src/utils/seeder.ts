@@ -1,7 +1,7 @@
 import { hash } from 'bcrypt'
 import User from '../models/user.model'
 import App from '../models/app.model'
-import sequelize from '../utils/database.ts'
+import sequelize from './database.js'
 
 const seedDatabase = async (): Promise<void> => {
   try {

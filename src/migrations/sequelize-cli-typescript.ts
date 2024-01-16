@@ -1,7 +1,11 @@
-import { type QueryInterface, DataTypes } from 'sequelize'
+import { Sequelize, DataTypes } from 'sequelize'
+
+const sequelize = new Sequelize()
+
+const queryInterface = sequelize.getQueryInterface()
 
 module.exports = {
-  up: async (queryInterface: QueryInterface) => {
+  up: async () => {
     await queryInterface.createTable('TestTable', {
       id: {
         type: DataTypes.INTEGER,
@@ -9,7 +13,6 @@ module.exports = {
         allowNull: false,
         primaryKey: true
       },
-      // Add your table columns here...
       createdAt: {
         type: DataTypes.DATE,
         allowNull: false,
@@ -23,7 +26,7 @@ module.exports = {
     })
   },
 
-  down: async (queryInterface: QueryInterface) => {
+  down: async () => {
     await queryInterface.dropTable('TestTable')
   }
 }

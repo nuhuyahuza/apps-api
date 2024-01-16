@@ -1,6 +1,7 @@
 import { Sequelize } from 'sequelize'
 import dbConfig from '../config/dbConfig'
 
+
 const { database, username, password, host, dialect, pool } = dbConfig.development
 
 const sequelize = new Sequelize(
