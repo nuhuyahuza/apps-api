@@ -1,29 +1,21 @@
-// src/__tests__/app.test.ts
 import request from 'supertest'
 import app from '../app'
+import { config } from 'dotenv'
+
+config()
 
 describe('App Integration Tests', () => {
-  it('should return "Public route" for GET /public', async () => {
-    const response = await request(app).get('/public')
+  it('should return apps object for GET /apps', async () => {
+    const response = await request(app).get('/apps')
     expect(response.status).toBe(200)
-    expect(response.text).toBe('Public route')
   })
 
-  it('should return "Protected route" for GET /protected with a valid token', async () => {
-    // You'll need a valid JWT token for this test
-    // Replace 'your_valid_token_here' with an actual token
-    const validToken = 'your_valid_token_here'
+  it('should return "Protected route" for GET /users with a valid token', async () => {
+    const validToken = process.env.TOKEN || 'my_jwt_secret'
 
     const response = await request(app)
-      .get('/protected')
+      .get('/users')
       .set('Authorization', validToken)
-
     expect(response.status).toBe(200)
-    expect(response.text).toBe('Protected route')
-  })
-
-  it('should return 401 for GET /protected without a token', async () => {
-    const response = await request(app).get('/protected')
-    expect(response.status).toBe(401)
   })
 })

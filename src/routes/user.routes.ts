@@ -2,8 +2,8 @@ import { Router } from 'express'
 import { body, param } from 'express-validator'
 import * as userController from '../controllers/user.controller'
 import { checkAdminPermission } from '../utils/authorization'
-import validate from '@src/middlewares/validateRequests'
-import { createUserSchema, updateUserSchema } from '@src/dto/userSchema'
+import validate from '../middlewares/validateRequests'
+import { createUserSchema, updateUserSchema } from '../dto/userSchema'
 
 const router = Router()
 

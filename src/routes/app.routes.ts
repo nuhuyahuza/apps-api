@@ -3,8 +3,8 @@ import { Router } from 'express'
 import { body, param } from 'express-validator'
 import * as appController from '../controllers/app.controller'
 import { checkAdminPermission } from '../utils/authorization'
-import validate from '@src/middlewares/validateRequests'
-import { createAppSchema, updateAppSchema } from '@src/dto/appSchema'
+import validate from '../middlewares/validateRequests'
+import { createAppSchema, updateAppSchema } from '../dto/appSchema'
 
 const router = Router()
 

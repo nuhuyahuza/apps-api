@@ -2,8 +2,8 @@
 import { Router } from 'express'
 import { body } from 'express-validator'
 import * as authController from '../controllers/auth.controller'
-import validate from '@src/middlewares/validateRequests'
-import { loginSchema } from '@src/dto/loginSchema'
+import validate from '../middlewares/validateRequests'
+import { loginSchema } from '../dto/loginSchema'
 
 const router = Router()
 

@@ -1,6 +1,6 @@
 import { type AnySchema } from 'yup'
 import { type Request, type Response, type NextFunction } from 'express'
-import { type APIResponse } from '@src/types/api-response'
+import { type APIResponse } from '../types/api-response'
 
 const validate = (schema: AnySchema) => async (
   req: Request,

@@ -19,12 +19,12 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 
     // Annotating the response object with APIResponse type
     const response: APIResponse = { data: newUser }
-    res.status(201).json(response)
-  } catch (error) {
+    res.status(201).json({ _msg: 'User Added Successfully', data: response } as APIResponse)
+  } catch (error: any) {
     // console.error(error);
     // Annotating the response object with APIResponse type
     const response: APIResponse = { error: 'Internal Server Error' }
-    res.status(500).json(response)
+    res.status(500).json({ _msg: 'Failed to add User', data: response, error } as APIResponse)
   }
 }
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
