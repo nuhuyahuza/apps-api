@@ -11,7 +11,7 @@ const seedDatabase = async (): Promise<void> => {
     await User.create({ name: 'Admin', email: 'admin@example.com', password: hashedAdminPassword })
 
     const hashedGuestPassword = await hash(process.env.GUEST_PASSWORD || 'guestpassword', 10)
-    await User.create({ name: 'Guest', email: 'guest@example.com', password: hashedGuestPassword})
+    await User.create({ name: 'Guest', email: 'guest@example.com', password: hashedGuestPassword })
 
     await App.create({ name: 'App1', icon: 'icon1@example.com', url: 'icon1@example.com' })
 
