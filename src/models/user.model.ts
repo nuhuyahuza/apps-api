@@ -6,7 +6,6 @@ class User extends Model {
   public name!: string
   public email!: string
   public password!: string
-  public isAdmin!: boolean
 }
 
 User.init(
@@ -28,11 +27,6 @@ User.init(
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    },
-    isAdmin: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
     }
   },
   {

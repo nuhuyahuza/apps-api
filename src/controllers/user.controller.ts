@@ -5,7 +5,7 @@ import User from '../models/user.model'
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, email, password, isAdmin } = req.body
+    const { name, email, password } = req.body
 
     const hashedPassword = await hash(password, 10)
 
@@ -13,8 +13,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
     const newUser = await User.create({
       name,
       email,
-      password: hashedPassword,
-      isAdmin
+      password: hashedPassword
     })
 
     // Annotating the response object with APIResponse type
@@ -30,7 +29,7 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
 export const updateUser = async (req: Request, res: Response): Promise<void> => {
   try {
     // const { id } = req.params;
-    const { id, name, email, password, isAdmin } = req.body
+    const { id, name, email, password } = req.body
 
     const user = await User.findByPk(id)
 
@@ -42,7 +41,6 @@ export const updateUser = async (req: Request, res: Response): Promise<void> => 
     user.name = name
     user.email = email
     user.password = password
-    user.isAdmin = isAdmin
 
     await user.save()
 

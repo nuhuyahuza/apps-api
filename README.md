@@ -64,7 +64,6 @@ The login information provided is the default login when the app is initialized
     "name": "John Doe",
     "email": "john@example.com",
     "password": "password123",
-    "isAdmin": true
   }
 
   ### 2. Update User (Only an admin can update)
@@ -77,7 +76,6 @@ The login information provided is the default login when the app is initialized
     "name": "John Doe",
     "email": "john@example.com",
     "password": "password123",
-    "isAdmin": true
   },
 
     ### 3. Delete User (Only an admin can delete)
