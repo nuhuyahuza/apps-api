@@ -2,38 +2,39 @@
 import express from 'express';
 import { body, param } from 'express-validator';
 import * as appController from '../controllers/app.controller';
-import { validateRequest } from '../utils/validation';
 import { checkAdminPermission, checkGuestAccess } from '../utils/authorization';
+import validate from '@src/middlewares/validateRequests';
+import { createAppSchema, updateAppSchema } from '@src/dto/appSchema';
 
 const router = express.Router();
 
 router.post(
-  '/addApp',
+  '/add',
   [
     body('name').notEmpty(),
     body('icon').notEmpty(),
     body('url').isURL(),
   ],
-  validateRequest,
+  validate(createAppSchema),
   checkAdminPermission,
   appController.addApp
 );
 
 router.put(
-  '/updateApp/:id',
+  '/update/:id',
   [
     param('id').isNumeric(),
     body('name').notEmpty(),
     body('icon').notEmpty(),
     body('url').isURL(),
   ],
-  validateRequest,
+  validate(updateAppSchema),
   checkAdminPermission,
   appController.updateApp
 );
 
-router.delete('/:id', [param('id').isNumeric()], validateRequest, checkAdminPermission, appController.deleteApp);
-router.get('/:id', checkGuestAccess, appController.getApp);
-router.get('/', checkGuestAccess, appController.listApps);
+router.delete('/:id', [param('id').isNumeric()], checkAdminPermission, appController.deleteApp);
+router.get('/:id',  [param('id').isNumeric()],checkGuestAccess, appController.getApp);
+router.get('/',  [param('id').isNumeric()], checkGuestAccess, appController.listApps);
 
 export default router;

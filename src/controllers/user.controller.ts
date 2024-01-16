@@ -2,19 +2,10 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import { APIResponse } from '../types/api-response';
 import User from '../models/user.model';
-import { boolean } from 'yup';
 
 export const addUser = async (req: Request, res: Response): Promise<void> => {
   try {
     const { name, email, password,isAdmin } = req.body;
-
-    // Check if the user is an admin
-    if (!isAdmin) {
-      // Annotating the response object with APIResponse type
-      const response: APIResponse = { error: 'Permission Denied' };
-      const status:any = res.status(403).json(response);
-      return status;
-    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -23,17 +14,87 @@ export const addUser = async (req: Request, res: Response): Promise<void> => {
       name,
       email,
       password: hashedPassword,
-      isAdmin: false, // Assuming you set isAdmin to false for all new users
+      isAdmin
     });
 
     // Annotating the response object with APIResponse type
     const response: APIResponse = { data: newUser };
     res.status(201).json(response);
   } catch (error) {
-    console.error(error);
+    // console.error(error);
 
     // Annotating the response object with APIResponse type
     const response: APIResponse = { error: 'Internal Server Error' };
     res.status(500).json(response);
+  }
+};
+export const updateUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    // const { id } = req.params;
+    const { id,name, email,password,isAdmin } = req.body;
+
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      res.status(404).json({ error: 'User not found' } as APIResponse);
+      return;
+    }
+
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    user.isAdmin = isAdmin;
+
+    await user.save();
+
+    res.json({_msg:"Record Updated Successfully", data: user, error:""} as APIResponse);
+  } catch (error) {
+    // console.error(error);
+    res.status(500).json({ _msg:"Failed To Update Record",error: 'Internal Server Error' } as APIResponse);
+  }
+};
+
+export const deleteUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      res.status(404).json({ _msg:"Record retrieved.", error: `User not found` } as APIResponse);
+      return;
+    }
+
+    await user.destroy();
+
+    res.json({ _msg:"Record deleted successfully",data: { } } as APIResponse);
+  } catch (error) {
+    // console.error(error);
+    res.status(500).json({  _msg:"",error: 'Internal Server Error' } as APIResponse);
+  }
+};
+
+export const getUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const { id } = req.params;
+    const user = await User.findByPk(id);
+
+    if (!user) {
+      res.status(404).json({_msg:"Record not Found" ,error: 'User not found' } as APIResponse);
+      return;
+    }
+    res.status(200).json({ _msg:"User Retrieved",data: user, error:""} as APIResponse);
+  } catch (error) {
+    // console.error(error);
+    res.status(500).json({ _msg:"Request Failed",data: {},error: 'Internal Server Error' } as APIResponse);
+  }
+};
+
+export const listUsers = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const users = await User.findAll();
+    res.status(200).json({ _msg:"Users Retrieved",data: users, error:""} as APIResponse);
+  } catch (error) {
+    // console.error(error);
+    res.status(500).json({ _msg: "Users Retrieved", data: {},error: 'Internal Server Error' } as APIResponse);
   }
 };

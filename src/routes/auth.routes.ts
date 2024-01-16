@@ -2,17 +2,18 @@
 import express from 'express';
 import { body } from 'express-validator';
 import * as authController from '../controllers/auth.controller';
-import { validateRequest } from '../utils/validation';
+import validate from '@src/middlewares/validateRequests';
+import { loginSchema } from '@src/dto/loginSchema';
 
 const router = express.Router();
 
 router.post(
-  '/login',
+  '/',
   [
     body('email').isEmail(),
     body('password').isLength({ min: 6 }),
   ],
-  validateRequest,
+  validate(loginSchema),
   authController.login
 );
 

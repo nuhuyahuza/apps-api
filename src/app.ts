@@ -30,7 +30,7 @@ app.use(json());
 app.use(urlencoded({ extended: true }));
 
 // Routes
-app.use('/auth', authRoutes);
+app.use('/login', authRoutes);
 app.use('/users', userRoutes);
 app.use('/apps', appRoutes);
 

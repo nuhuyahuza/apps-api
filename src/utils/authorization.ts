@@ -14,28 +14,22 @@ export const checkAdminPermission = (req: AuthenticatedRequest, res: Response, n
   const bearerHeader = req.headers['authorization'];
 
   if (typeof bearerHeader !== 'undefined') {
-    const bearer = bearerHeader.split(" ");
-    const bearerToken = bearer[1];
-
-    try {
-      const decodedToken: any = jwt.verify(bearerToken, process.env.JWT_SECRET as string);
-
-      if (!decodedToken.isAdmin) {
-        res.status(403).json({ _msg: "unauthorized action", error: 'Permission Denied' });
-        return;
-      }
-    } catch (error) {
-      // Handle token verification errors (e.g., expired or invalid token)
-      res.status(401).json({ _msg: "unauthorized action", error: 'Invalid Token' });
-      return;
+    const token = bearerHeader.split(" ")[1];
+    if (token) {
+       jwt.verify(token,'my_jwt_secret_key', (error, decoded) => {
+        if (error) {
+          res.status(401).json({ _msg: "unauthorized action", error: `Invalid Token ` });
+        } else {
+          res.locals.jwt = decoded;
+          next();
+        }
+      });
     }
-  } else if (!(req.user)?.isAdmin) {
-    res.status(403).json({ _msg: "unauthorized action", error: 'Permission Denied' });
-    return;
-  }
-
-  // Call next to proceed to the next middleware or route handler
-  next();
+      // if (!decodedToken.isAdmin) {
+      //   res.status(403).json({ _msg: "unauthorized action", error: 'Permission Denied' });
+      //   return;
+      // }
+  } 
 };
 
 export const checkGuestAccess = (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {

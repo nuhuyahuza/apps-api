@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { APIResponse } from '../types/api-response';
-import User  from '../models/user.model';
-import  {validateRequest}  from '../utils/validation';
+import User from '../models/user.model';
+import  {validateLoginRequest}  from '../middlewares/login.validation';
+import signJWT from '@src/functions/signJWT';
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -15,11 +16,11 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET || 'your_secret_key', {
+    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, {
       expiresIn: '1h',
     });
 
-    res.json({ _msg:"Login Successful",data: { token } } as APIResponse);
+    res.json({ _msg:`Login Successful ${user.name}`,data: { token } } as APIResponse);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' } as APIResponse);
